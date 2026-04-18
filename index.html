@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>♡ 핑크 타로 ♡</title>
+<title>♡ 샤비메어 타로타로 ♡</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -609,7 +609,7 @@ h1 em {
     <p class="header-sub">카드를 뽑아 당신만의 이야기를 읽어드릴게요</p>
     <div class="ornament">
       <div class="ornament-line"></div>
-      <div class="ornament-icon">🎀</div>
+      <div class="ornament-icon">✦</div>
       <div class="ornament-line"></div>
     </div>
   </header>
@@ -650,7 +650,7 @@ h1 em {
   <button class="reset-btn" id="resetBtn" style="display:none" onclick="resetAll()">↩ 다시 뽑기</button>
 </main>
 
-<footer class="site-footer">♡ 핑크 타로 · 재미로만 봐주세요 ♡</footer>
+<footer class="site-footer">♡ shabi Nmare tarot tarot · 재미로만 봐주세요 ♡</footer>
 
 <script>
 // ── CURSOR ──
@@ -900,10 +900,14 @@ JSON 형식으로만 응답하세요 (다른 텍스트 없이):
   readingArea.appendChild(overallDiv);
 
   try {
-    const response = await fetch('/api/tarot', {
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ prompt })
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        messages: [{ role: 'user', content: prompt }]
+      })
     });
 
     const data = await response.json();
